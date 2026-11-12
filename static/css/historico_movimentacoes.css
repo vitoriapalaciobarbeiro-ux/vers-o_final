@@ -1,0 +1,650 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --principal: #0D7C4E;
+    --secundaria: #16A34A;
+    --fundo_principal: #22C55E;
+    --suave: #DDF7E7;
+    --fundo_claro: #F7FAF8;
+    --branco: #FFFFFF;
+    --neutro: #1F2937;
+    --neutro_secundario: #6B7280;
+    --barra_grafico: #7DD4AF;
+    --cards_despesas: #ED4D5D;
+    --fundo_cards: #F2CDD2;
+    --cards_beneficios: #247FDD;
+    --fundo_beneficios: #D4E7F8;
+    --preto: #000000;
+    --fundo_cards1: #FFF2F4;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: var(--neutro);
+    background-color: var(--fundo_claro);
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* MENSAGENS */
+
+.flash-messages {
+    margin: 10px 0;
+}
+
+.flash {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    text-align: center;
+    animation: sumir 4s forwards;
+}
+
+@keyframes sumir {
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.flash.success {
+    background: var(--suave);
+    color: var(--principal);
+    border: 1px solid var(--barra_grafico);
+}
+
+.flash.error {
+    background: var(--fundo_cards1);
+    color: var(--cards_despesas);
+    border: 1px solid var(--fundo_cards);
+}
+
+/* CABEÇALHO */
+
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: var(--principal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header .logo_branca {
+    width: 95px;
+    height: auto;
+    margin-left: 16px;
+}
+
+.inicio_relatorio_previsao {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+    color: var(--branco);
+    margin-left: auto;
+}
+
+.inicio_relatorio_previsao a,
+.inicio_relatorio_previsao p {
+    color: var(--branco);
+}
+
+.header .icone_e_nome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 25px;
+}
+
+.header .icone_e_nome .icone_user {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    background-color: var(--branco);
+}
+
+.header .icone_e_nome .icone_user img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.header .icone_e_nome .nome_user {
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 9px;
+}
+
+.logout img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: block;
+}
+
+/* BARRA DE PESQUISA */
+
+.barra_pesquisa {
+    width: 92%;
+    margin: 35px auto 0;
+    padding: 20px 24px;
+    border: 2px solid var(--suave);
+    border-radius: 8px;
+    background-color: var(--branco);
+    box-shadow: 0 8px 25px rgba(13, 124, 78, 0.10);
+}
+
+.barra_pesquisa h3 {
+    color: var(--principal);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.barra_pesquisa form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.barra_pesquisa .campo_filtro {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.barra_pesquisa label {
+    color: var(--neutro);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.barra_pesquisa input,
+.barra_pesquisa select {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--suave);
+    border-radius: 5px;
+    background-color: var(--fundo_claro);
+    color: var(--neutro);
+    font-size: 12px;
+}
+
+.barra_pesquisa input:focus,
+.barra_pesquisa select:focus {
+    border-color: var(--principal);
+}
+
+.barra_pesquisa button {
+    width: 55px;
+    height: 38px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--principal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.barra_pesquisa button img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.barra_pesquisa button:hover {
+    background-color: var(--secundaria);
+}
+
+/* HISTÓRICO */
+
+.historico {
+    width: 92%;
+    height: auto;
+    margin: 45px auto;
+    padding: 20px;
+    background-color: var(--branco);
+    border: 2px solid var(--suave);
+    border-radius: 6px;
+}
+
+.historico h3 {
+    color: var(--principal);
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.conteudo-div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 40px;
+    gap: 30px;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* CARDS */
+
+.card_his {
+    width: calc(33.333% - 20px);
+    min-height: 145px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--suave);
+    background-color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.receita_his {
+    border-left: 4px solid var(--secundaria);
+}
+
+.despesa_his {
+    border-left: 4px solid var(--cards_despesas);
+}
+
+/* INFORMAÇÕES DO CARD */
+
+.informacoes_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.info_movimentacao {
+    width: 70%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.data_movimentacao {
+    color: var(--neutro_secundario);
+    font-size: 11px;
+}
+
+.info_movimentacao h4 {
+    color: var(--neutro);
+    font-size: 14px;
+}
+
+.info_movimentacao p {
+    color: var(--neutro_secundario);
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.detalhes_movimentacao {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.categoria_his {
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 30px;
+    color: var(--branco);
+    text-align: center;
+}
+
+.detalhes_movimentacao strong {
+    font-size: 13px;
+    color: var(--secundaria);
+}
+
+.despesa_his .detalhes_movimentacao strong {
+    color: var(--cards_despesas);
+}
+
+/* BOTÕES DOS CARDS */
+
+.editar-excluir {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+}
+
+.editar-excluir form {
+    display: flex;
+}
+
+.editar,
+.excluir,
+.desativar,
+.ativar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    height: 30px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--branco);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.editar {
+    background-color: var(--principal);
+}
+
+.excluir {
+    background-color: var(--cards_despesas);
+}
+
+.desativar {
+    background-color: var(--neutro_secundario);
+}
+
+.ativar {
+    background-color: var(--cards_beneficios);
+}
+
+.editar:hover {
+    background-color: var(--secundaria);
+}
+
+.excluir:hover {
+    background-color: #D93649;
+}
+
+.desativar:hover {
+    background-color: var(--neutro);
+}
+
+.ativar:hover {
+    background-color: #185EAB;
+}
+
+/* NOVA MOVIMENTAÇÃO */
+
+.novo {
+    display: block;
+    width: fit-content;
+    background-color: var(--principal);
+    color: var(--branco);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 25px 4% 30px auto;
+}
+
+.novo:hover {
+    background-color: var(--secundaria);
+}
+
+/* TELAS MÉDIAS */
+
+@media (max-width: 1024px) {
+
+    .inicio_relatorio_previsao {
+        gap: 70px;
+    }
+
+    .card_his {
+        width: calc(50% - 15px);
+    }
+
+    .historico {
+        width: 94%;
+    }
+
+    .barra_pesquisa form {
+        flex-wrap: wrap;
+    }
+
+}
+
+/* TABLETS */
+
+@media (max-width: 768px) {
+
+    .inicio_relatorio_previsao {
+        gap: 30px;
+    }
+
+    .header .logo_branca {
+        width: 80px;
+    }
+
+    .header .icone_e_nome .nome_user {
+        display: none;
+    }
+
+    .barra_pesquisa {
+        width: 85%;
+    }
+
+    .historico {
+        width: 96%;
+    }
+
+    .card_his {
+        width: 100%;
+    }
+
+    .conteudo-div {
+        gap: 15px;
+    }
+
+}
+
+/* CELULARES */
+
+@media (max-width: 425px) {
+
+    .header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .header .logo_branca {
+        width: 65px;
+        margin-left: 0;
+    }
+
+    .inicio_relatorio_previsao {
+        gap: 12px;
+        margin-left: 15px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 10px;
+    }
+
+    .header .icone_e_nome {
+        margin-right: 0;
+        gap: 5px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 18px;
+        height: 18px;
+    }
+
+    .logout img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .barra_pesquisa {
+        width: 92%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .barra_pesquisa form {
+        gap: 15px;
+    }
+
+    .barra_pesquisa .campo_filtro {
+        width: 100%;
+    }
+
+    .barra_pesquisa button {
+        width: 100%;
+    }
+
+    .historico {
+        width: 95%;
+        height: auto;
+        margin: 35px auto 0;
+        padding: 12px;
+    }
+
+    .conteudo-div {
+        height: 500px;
+        margin-top: 25px;
+    }
+
+    .card_his {
+        padding: 12px;
+    }
+
+    .info_movimentacao h4 {
+        font-size: 12px;
+    }
+
+    .info_movimentacao p {
+        font-size: 11px;
+    }
+
+    .editar,
+    .excluir,
+    .desativar,
+    .ativar {
+        min-width: 75px;
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .novo {
+        display: block;
+        width: 170px;
+        margin: 45px auto 20px;
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+}
+
+/* CELULARES MENORES */
+
+@media (max-width: 375px) {
+
+    .inicio_relatorio_previsao {
+        gap: 8px;
+        margin-left: 10px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 9px;
+    }
+
+    .barra_pesquisa {
+        width: 94%;
+    }
+
+    .historico {
+        width: 96%;
+    }
+
+    .novo {
+        width: 94%;
+    }
+
+}
+
+/* TELAS MUITO PEQUENAS */
+
+@media (max-width: 325px) {
+
+    .header .logo_branca {
+        width: 55px;
+    }
+
+    .inicio_relatorio_previsao {
+        gap: 5px;
+        margin-left: 5px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 8px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 15px;
+        height: 15px;
+    }
+
+    .logout img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .barra_pesquisa input {
+        font-size: 10px;
+    }
+
+    .historico h3 {
+        font-size: 12px;
+    }
+
+}

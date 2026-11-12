@@ -1,0 +1,1045 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --principal: #0D7C4E;
+    --secundaria: #16A34A;
+    --fundo_principal: #22C55E;
+    --suave: #DDF7E7;
+    --fundo_claro: #F7FAF8;
+    --branco: #FFFFFF;
+    --neutro: #1F2937;
+    --neutro_secundario: #6B7280;
+    --barra_grafico: #7DD4AF;
+    --cards_despesas: #ED4D5D;
+    --fundo_cards: #F2CDD2;
+    --cards_beneficios: #247FDD;
+    --fundo_beneficios: #D4E7F8;
+    --preto: #000000;
+    --fundo_cards1: #FFF2F4;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    color: var(--neutro);
+    background: var(--branco);
+}
+
+main {
+    background-color: var(--fundo_claro);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* MENSAGENS */
+
+.flash-messages {
+    margin: 10px 0;
+}
+
+.flash {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    text-align: center;
+    animation: sumir 4s forwards;
+}
+
+@keyframes sumir {
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.flash.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* CABEÇALHO */
+
+.header {
+    width: 100%;
+    min-height: 70px;
+    background-color: var(--principal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header .logo_branca {
+    width: 95px;
+    height: auto;
+    margin-left: 16px;
+}
+
+.inicio_relatorio_previsao {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 120px;
+    margin-left: auto;
+}
+
+.inicio_relatorio_previsao a {
+    color: var(--branco);
+}
+
+.header .icone_e_nome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 25px;
+}
+
+.header .icone_e_nome .icone_user {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+}
+
+.header .icone_e_nome .icone_user img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.header .icone_e_nome .nome_user {
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 9px;
+}
+
+.logout img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: block;
+}
+
+/* CONTEÚDO FINANCEIRO */
+
+.financeiro {
+    padding: 30px;
+}
+
+.topo_dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.boas_vindas {
+    min-width: 0;
+}
+
+.financeiro h2 {
+    color: #008653;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.financeiro p {
+    color: #84919a;
+    margin-top: 0;
+}
+
+/* FILTRO */
+
+select {
+    height: 30px;
+    border: 1px solid #DCE5EF;
+    border-radius: 5px;
+    padding: 0 8px;
+    background: var(--branco);
+    font-size: 10px;
+    color: var(--neutro_secundario);
+}
+
+.filtro {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid #C9EDDF;
+    border-radius: 6px;
+    background-color: var(--branco);
+}
+
+.filtro form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.filtro form > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.filtro label {
+    color: var(--neutro_secundario);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.filtro select {
+    max-width: 100%;
+}
+
+.button {
+    height: 32px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--principal);
+    color: var(--branco);
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background-color: #095E3B;
+}
+
+/* CARDS FINANCEIROS */
+
+.cards {
+    display: flex;
+    gap: 12px;
+    margin-top: 45px;
+}
+
+.card {
+    width: 33.33%;
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 16px;
+    border: 1px solid #e2f1e9;
+    border-radius: 6px;
+    background-color: #DDF7E7;
+}
+
+.icone {
+    background-color: #078657;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.card h4 {
+    color: #008653;
+    margin: 0 0 7px;
+    font-size: 12px;
+}
+
+.card h1 {
+    color: #008653;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0 0 5px;
+    overflow-wrap: anywhere;
+}
+
+.card p {
+    color: #77858c;
+    font-size: 9px;
+}
+
+.saldo {
+    background-color: #e6feef;
+    border-color: #9beaaf;
+}
+
+.despesas {
+    background-color: #fff2f4;
+    border-color: var(--fundo_cards);
+}
+
+.despesas h4,
+.despesas h1 {
+    color: #f44860;
+}
+
+.despesas .icone {
+    background-color: #e9576a;
+}
+
+/* BOTÃO PDF */
+
+.acoes-financeiro {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.baixar-pdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 10px 16px;
+    background-color: var(--branco);
+    border: 1px solid #B8DDCA;
+    border-radius: 6px;
+    color: var(--principal);
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.baixar-pdf span {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.baixar-pdf:hover {
+    background-color: var(--suave);
+    border-color: var(--principal);
+}
+
+/* PREVISÕES */
+
+
+.topo_previsoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.topo_previsoes h3 {
+    color: #8A6414;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.topo_previsoes p {
+    color: #84919a;
+    font-size: 11px;
+}
+
+.topo_previsoes form {
+    margin: 0;
+}
+
+.topo_previsoes select {
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid #EAD39B;
+    border-radius: 5px;
+    background-color: #FFFCF4;
+    color: #8A6414;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.cards_previsoes {
+    display: flex;
+    gap: 14px;
+}
+
+.cards_previsoes .card {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    align-items: center;
+    padding: 20px;
+}
+
+.cards_previsoes .prev {
+    background-color: #FFF8E6;
+    border: 1px solid #EAD39B;
+    border-radius: 8px;
+}
+
+.cards_previsoes .prev .icone {
+    background-color: #C49A35;
+    color: #FFFFFF;
+}
+
+.cards_previsoes .prev h4 {
+    color: #8A6414;
+    font-size: 12px;
+}
+
+.cards_previsoes .prev h1 {
+    color: #785716;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.botao-pdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 0 16px;
+    border: 1px solid #D8B75C;
+    border-radius: 6px;
+    background-color: #FFF8E6;
+    color: #8A6414;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.botao-pdf:hover {
+    background-color: #F5E7BF;
+    border-color: #C49A35;
+}
+
+/* GRÁFICOS */
+
+.container-graficos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+    padding: 20px 30px;
+}
+
+.card-grafico {
+    background-color: var(--branco);
+    border: 1px solid #DDF7E7;
+    border-radius: 10px;
+    padding: 16px;
+    min-width: 0;
+}
+
+.card-grafico h3 {
+    color: #0D7C4E;
+    font-size: 15px;
+    margin: 0 0 4px;
+    font-weight: 600;
+}
+
+.card-grafico p {
+    color: #6B7280;
+    font-size: 12px;
+    margin: 0 0 12px;
+}
+
+.card-grafico object {
+    width: 100%;
+    height: 350px;
+    display: block;
+    max-width: 100%;
+}
+
+.grafico {
+    width: 50%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: var(--branco);
+    border-radius: 12px;
+}
+
+.grafico-svg {
+    display: block;
+    width: 100%;
+    height: 350px;
+    border: none;
+}
+
+.graficos {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip .value {
+    fill: #eeefef !important;
+}
+
+/* MENU INFERIOR - ESCONDIDO NO COMPUTADOR */
+
+.menu {
+    display: none;
+}
+
+/* RESPONSIVIDADE - TABLETS */
+
+@media (max-width: 1024px) {
+
+    .inicio_relatorio_previsao {
+        gap: 60px;
+    }
+
+    .header .icone_e_nome {
+        margin-right: 15px;
+    }
+
+    .financeiro {
+        padding: 25px;
+    }
+
+    .cards {
+        gap: 10px;
+    }
+
+    .card {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .card h1 {
+        font-size: 21px;
+    }
+
+    .container-graficos {
+        padding: 20px 25px;
+        gap: 14px;
+    }
+
+    .card-grafico {
+        padding: 13px;
+    }
+
+    .card-grafico object,
+    .grafico-svg {
+        height: 320px;
+    }
+}
+
+/* RESPONSIVIDADE - TABLETS MENORES */
+
+@media (max-width: 768px) {
+
+    .header {
+        min-height: 65px;
+    }
+
+    .header .logo_branca {
+        width: 75px;
+    }
+
+    .inicio_relatorio_previsao {
+        gap: 25px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 12px;
+    }
+
+    .header .icone_e_nome .nome_user {
+        display: none;
+    }
+
+    .logout img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .financeiro {
+        padding: 20px;
+    }
+
+    .topo_dashboard {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .financeiro h2 {
+        font-size: 22px;
+    }
+
+    .financeiro p {
+        font-size: 12px;
+    }
+
+    .filtro {
+        padding: 9px;
+    }
+
+    .filtro form > div {
+        gap: 7px;
+    }
+
+    .cards {
+        gap: 8px;
+        margin-top: 35px;
+    }
+
+    .card {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .icone {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        font-size: 20px;
+    }
+
+    .card h1 {
+        font-size: 18px;
+    }
+
+    .card h4 {
+        font-size: 11px;
+    }
+
+    .cards_previsoes {
+        gap: 8px;
+    }
+
+    .cards_previsoes .card {
+        padding: 12px;
+    }
+
+    .cards_previsoes .prev h1 {
+        font-size: 18px;
+    }
+
+    .topo_previsoes h3 {
+        font-size: 15px;
+    }
+
+    .container-graficos {
+        grid-template-columns: 1fr 1fr;
+        padding: 15px 20px;
+    }
+
+    .card-grafico object,
+    .grafico-svg {
+        height: 280px;
+    }
+}
+
+/* RESPONSIVIDADE - CELULARES */
+
+@media (max-width: 600px) {
+
+    /* CABEÇALHO */
+
+    .header {
+        height: 65px;
+        min-height: 65px;
+        padding: 0 12px;
+        justify-content: space-between;
+    }
+
+    .header .logo_branca {
+        width: 65px;
+        margin-left: 0;
+    }
+
+    /* Esconde o menu superior */
+
+    .inicio_relatorio_previsao {
+        display: none;
+    }
+
+    .header .icone_e_nome {
+        margin: 0;
+        gap: 8px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+
+    .header .icone_e_nome .nome_user {
+        display: none;
+    }
+
+    .logout img {
+        width: 27px;
+        height: 27px;
+    }
+
+    /* CONTEÚDO */
+
+    .financeiro {
+        padding: 18px 15px;
+    }
+
+    .topo_dashboard {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .financeiro h2 {
+        font-size: 21px;
+    }
+
+    .financeiro p {
+        font-size: 11px;
+    }
+
+    /* FILTRO */
+
+    .filtro {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .filtro form {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filtro form > div {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .filtro label {
+        font-size: 11px;
+    }
+
+    .filtro select {
+        flex: 1;
+        min-width: 0;
+        height: 34px;
+    }
+
+    .filtro button {
+        width: 100%;
+    }
+
+    /* CARDS FINANCEIROS */
+
+    .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .card {
+        width: 100%;
+        min-height: 85px;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .card h1 {
+        font-size: 21px;
+    }
+
+    .card h4 {
+        font-size: 12px;
+    }
+
+    .card p {
+        font-size: 10px;
+    }
+
+    /* PDF */
+
+    .acoes-financeiro {
+        justify-content: center;
+    }
+
+    .baixar-pdf {
+        width: 100%;
+        font-size: 11px;
+    }
+
+    /* PREVISÕES */
+
+    .topo_previsoes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .topo_previsoes > div {
+        width: 100%;
+    }
+
+    .topo_previsoes h3 {
+        font-size: 15px;
+    }
+
+    .topo_previsoes p {
+        font-size: 10px;
+    }
+
+    .topo_previsoes form {
+        flex: 1;
+    }
+
+    .topo_previsoes select {
+        width: 100%;
+    }
+
+    .botao-pdf {
+        flex: 1;
+        padding: 0 8px;
+        font-size: 10px;
+    }
+
+    .cards_previsoes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cards_previsoes .card {
+        width: 100%;
+        min-height: 80px;
+        padding: 14px;
+    }
+
+    .cards_previsoes .prev h1 {
+        font-size: 20px;
+    }
+
+    /* GRÁFICOS */
+
+    .container-graficos {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 15px 20px;
+    }
+
+    .card-grafico {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .card-grafico h3 {
+        font-size: 14px;
+    }
+
+    .card-grafico p {
+        font-size: 10px;
+    }
+
+    .card-grafico object,
+    .grafico-svg {
+        width: 100%;
+        height: 280px;
+    }
+
+    /* MENU INFERIOR */
+
+    .menu {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background-color: var(--principal);
+        justify-content: space-around;
+        align-items: center;
+        padding: 5px 0;
+        z-index: 1000;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.10);
+    }
+
+    .menu a {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        color: var(--branco);
+    }
+
+    .menu img {
+        width: 23px;
+        height: 23px;
+        object-fit: contain;
+    }
+
+    .menu p {
+        color: var(--branco);
+        font-size: 10px;
+        margin: 0;
+    }
+
+    /* Espaço para o menu não cobrir o conteúdo */
+
+    body {
+        padding-bottom: 75px;
+    }
+}
+
+/* CELULARES PEQUENOS */
+
+@media (max-width: 375px) {
+
+    .header {
+        padding: 0 9px;
+    }
+
+    .header .logo_branca {
+        width: 58px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 27px;
+        height: 27px;
+        min-width: 27px;
+    }
+
+    .logout img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .financeiro {
+        padding: 15px 12px;
+    }
+
+    .financeiro h2 {
+        font-size: 19px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card h1 {
+        font-size: 19px;
+    }
+
+    .cards_previsoes .prev h1 {
+        font-size: 18px;
+    }
+
+    .container-graficos {
+        padding: 10px 12px 20px;
+    }
+
+    .card-grafico object,
+    .grafico-svg {
+        height: 240px;
+    }
+
+    .menu {
+        height: 62px;
+    }
+
+    .menu img {
+        width: 21px;
+        height: 21px;
+    }
+
+    .menu p {
+        font-size: 9px;
+    }
+}
+
+/* CELULARES MUITO PEQUENOS */
+
+@media (max-width: 320px) {
+
+    .header .logo_branca {
+        width: 52px;
+    }
+
+    .financeiro {
+        padding: 12px 10px;
+    }
+
+    .financeiro h2 {
+        font-size: 17px;
+    }
+
+    .card h1 {
+        font-size: 17px;
+    }
+
+    .card h4 {
+        font-size: 10px;
+    }
+
+    .cards_previsoes .prev h1 {
+        font-size: 16px;
+    }
+
+    .topo_previsoes h3 {
+        font-size: 14px;
+    }
+
+    .card-grafico object,
+    .grafico-svg {
+        height: 210px;
+    }
+
+    .menu img {
+        width: 19px;
+        height: 19px;
+    }
+
+    .menu p {
+        font-size: 8px;
+    }
+}

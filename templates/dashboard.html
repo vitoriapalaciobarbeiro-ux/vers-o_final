@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icone-janela.png') }}">
+</head>
+
+<body class="pagina-dashboard">
+    <div class="header">
+        <img class="logo_branca" src="../static/img/logo_branca.png" alt="Logo">
+
+        <div class="inicio_relatorio_previsao">
+            <a href="{{ url_for('dashboard') }}">Início</a>
+            <a href="{{ url_for('relatorios') }}">Relatório</a>
+            <a href="{{ url_for('historicos') }}">Históricos</a>
+        </div>
+
+
+        <div class="icone_e_nome">
+            <a class="icone_user">
+                <img src="{{ url_for('static', filename=img) }}" alt="Foto de usuário">
+            </a>
+
+
+            <a href="{{ url_for('editar_usuario') }}">
+                <p class="nome_user">Olá, {{ nome }}</p>
+            </a>
+
+
+            <a href="{{ url_for('logout') }}" class="logout">
+                <img src="../static/img/logout.png" alt="Símbolo de sair">
+            </a>
+        </div>
+    </div>
+
+    <div class="financeiro">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="topo_dashboard">
+            <div class="boas_vindas">
+                <h2>Bem-vindo(a) {{ nome }}!</h2>
+                <p>Aqui está um resumo das suas finanças.</p>
+            </div>
+
+            <div class="filtro">
+                <form action="{{ url_for('dashboard') }}" method="POST">
+                    <div style="display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;">
+                        <label for="ano">Ano</label>
+                        <select name="ano" id="ano" required>
+                            <option disabled selected>Selecione um ano</option>
+                            {% for ano in anos %}
+                                <option value="{{ ano[0] }}">{{ ano[0] }}</option>
+                            {%endfor%}
+                        </select>
+
+                        <div id="div-mes" style="display: none;">
+                            <label for="mes">Mês</label>
+                            <select name="mes" id="mes" required>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="button">Filtrar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card saldo">
+                <div class="icone">＋</div>
+                <div>
+                    <h4>Receitas</h4>
+                    <h1>R$ {{ "%.2f"|format(receitas)|replace('.', ',') }}</h1>
+                    <p>Total de receitas ativas</p>
+                </div>
+            </div>
+
+            <div class="card despesas">
+                <div class="icone">+</div>
+                <div>
+                    <h4>Despesas</h4>
+                    <h1>R$ {{ "%.2f"|format(despesas)|replace('.', ',') }}</h1>
+                    <p>Total de despesas ativas</p>
+                </div>
+            </div>
+            <div class="card saldo">
+                <div class="icone">+</div>
+
+                <div>
+                    <h4>Saldo</h4>
+                    <h1>R$ {{ "%.2f"|format(saldo)|replace('.', ',') }}</h1>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="acoes-financeiro">
+            <a href="{{ url_for('pdf_financeiro') }}" class="baixar-pdf">
+                <span>↓</span>
+                Baixar relatório financeiro
+            </a>
+        </div>
+
+        <div class="previsoes">
+            <div class="topo_previsoes">
+                <div>
+                    <h3>Previsões financeiras</h3>
+                    <p>Estimativa de receitas e despesas</p>
+                </div>
+
+                <form action="{{ url_for('dashboard') }}" method="POST" id="form_prev">
+                    <select name="tipo_prev" id="tipo_prev" onchange="this.form.submit()" required>
+                        <option value="" disabled {% if tipo_prev not in ['0', '1'] %}selected{% endif %}>Selecione o período</option>
+                        <option value="0" {% if tipo_prev == '0' %}selected{% endif %}>Mensal</option>
+                        <option value="1" {% if tipo_prev == '1' %}selected{% endif %}>Anual</option>
+                    </select>
+                </form>
+
+                <a href="{{ url_for('pdf_previsoes', tipo_prev=tipo_prev) }}" class="botao-pdf">
+                    Baixar PDF
+                </a>
+            </div>
+
+            <div class="cards_previsoes">
+                <div class="card prev">
+                    <div class="icone">＋</div>
+                    <div>
+                        <h4>Receitas previstas</h4>
+                        <h1>R$ {{ "%.2f"|format(previsoes['receitas'])|replace('.', ',') }}</h1>
+                    </div>
+                </div>
+
+                <div class="card prev">
+                    <div class="icone">−</div>
+                    <div>
+                        <h4>Despesas previstas</h4>
+                        <h1>R$ {{ "%.2f"|format(previsoes['despesas'])|replace('.', ',') }}</h1>
+                    </div>
+                </div>
+
+                <div class="card prev">
+                    <div class="icone">＝</div>
+                    <div>
+                        <h4>Saldo previsto</h4>
+                        <h1>R$ {{ "%.2f"|format(previsoes['saldo'])|replace('.', ',') }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-graficos">
+
+        <div class="card-grafico">
+            <h3>Receitas x Despesas</h3>
+            <p>Comparativo das movimentações</p>
+
+            <object
+                type="image/svg+xml"
+                data="{{ grafico_movimentacoes }}"
+                class="grafico-svg">
+            </object>
+        </div>
+
+        <div class="card-grafico">
+            <form action="{{ url_for('dashboard') }}" method="POST" id="form-filtro">
+                <label for="tipo_grafico">Gráfico</label>
+
+                <select name="tipo_grafico" id="tipo_grafico">
+                    <option value="0" {% if tipo_grafico == '0' %}selected{% endif %}>Mensal</option>
+                    <option value="1" {% if tipo_grafico == '1' %}selected{% endif %}>Anual</option>
+                </select>
+                <button type="submit" class="button">Filtrar</button>
+            </form>
+            <h3>Saldo mensal</h3>
+            <p>Evolução do seu saldo</p>
+
+            <object
+                type="image/svg+xml"
+                data="{{ grafico_saldo }}"
+                class="grafico-svg">
+            </object>
+        </div>
+        <div class="menu">
+        <a class="inicio" href="{{ url_for('dashboard') }}">
+            <img src="{{ url_for('static', filename='img/casinha.png') }}" alt="">
+            <p>Início</p>
+        </a>
+
+        <a href="{{ url_for('relatorios') }}">
+            <img class="relatorios" src="{{ url_for('static', filename='img/setas.png') }}" alt="">
+            <p>Relatórios</p>
+        </a>
+
+        <a>
+            <img class="previsoes" src="{{ url_for('static', filename='img/previsoes_logo.png') }}" alt="">
+            <p>Previsões</p>
+        </a>
+    </div>
+
+    </div>
+
+    <script defer src="{{ url_for('static', filename='js/busca-mes.js') }}"></script>
+</body>
+</html>

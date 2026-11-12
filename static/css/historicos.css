@@ -1,0 +1,545 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --principal: #0D7C4E;
+    --secundaria: #16A34A;
+    --fundo_principal: #22C55E;
+    --suave: #DDF7E7;
+    --fundo_claro: #F7FAF8;
+    --branco: #FFFFFF;
+    --neutro: #1F2937;
+    --neutro_secundario: #6B7280;
+    --barra_grafico: #7DD4AF;
+    --cards_despesas: #ED4D5D;
+    --fundo_cards: #F2CDD2;
+    --cards_beneficios: #247FDD;
+    --fundo_beneficios: #D4E7F8;
+    --preto: #000000;
+    --fundo_cards1: #FFF2F4;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    color: var(--neutro);
+    background-color: var(--fundo_claro);
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* CABEÇALHO */
+
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: var(--principal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header .logo_branca {
+    width: 95px;
+    height: auto;
+    margin-left: 16px;
+}
+
+.inicio_relatorio_previsao {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+    color: var(--branco);
+    margin-left: auto;
+}
+
+.inicio_relatorio_previsao a,
+.inicio_relatorio_previsao p {
+    color: var(--branco);
+}
+
+.header .icone_e_nome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 25px;
+}
+.header .icone_e_nome .icone_user {
+    width: 30px;
+    height: 30px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    background-color: var(--branco);
+}
+
+.header .icone_e_nome .icone_user img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.header .icone_e_nome .nome_user {
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 9px;
+}
+
+.logout img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: block;
+}
+
+/* MENSAGENS */
+
+.flash-messages {
+    width: 92%;
+    margin: 15px auto;
+}
+
+.flash {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    text-align: center;
+    animation: sumir 4s forwards;
+}
+
+@keyframes sumir {
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.flash.success {
+    background: var(--suave);
+    color: var(--principal);
+    border: 1px solid var(--barra_grafico);
+}
+
+.flash.error {
+    background: var(--fundo_cards1);
+    color: var(--cards_despesas);
+    border: 1px solid var(--fundo_cards);
+}
+
+/* CONTEÚDO PRINCIPAL */
+
+main {
+    width: 100%;
+    padding: 1px 0 30px;
+}
+
+/* SEÇÕES DOS HISTÓRICOS */
+
+.historico {
+    width: 92%;
+    margin: 35px auto;
+    padding: 20px;
+    background-color: var(--branco);
+    border: 2px solid var(--suave);
+    border-radius: 8px;
+    box-shadow: 0 5px 18px rgba(13, 124, 78, 0.06);
+}
+
+.historico h3 {
+    color: var(--principal);
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    padding: 5px 5px 15px;
+    border-bottom: 1px solid var(--suave);
+}
+
+.titulo_historico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo_historico h3 {
+    margin: 0;
+}
+
+.titulo_historico a {
+    text-decoration: none;
+    color: var(--principal);
+    cursor: pointer;
+}
+
+/* ORGANIZAÇÃO DOS CARDS */
+
+.conteudo-div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 20px;
+    gap: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
+}
+
+/* CARDS */
+
+.card_his {
+    width: calc(33.333% - 14px);
+    min-height: 125px;
+    padding: 15px;
+    border-radius: 9px;
+    border: 1px solid #E5E7EB;
+    background-color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.card_his:hover {
+    border-color: var(--barra_grafico);
+}
+
+/* MOVIMENTAÇÕES */
+
+.receita_his {
+    border-left: 4px solid var(--secundaria);
+}
+
+.despesa_his {
+    border-left: 4px solid var(--cards_despesas);
+}
+
+.informacoes_card,
+.conteudo_trabalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.info_movimentacao {
+    width: 70%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.data_movimentacao {
+    color: var(--neutro_secundario);
+    font-size: 11px;
+}
+
+.info_movimentacao h4 {
+    color: var(--neutro);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info_movimentacao p {
+    color: var(--neutro_secundario);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.detalhes_movimentacao {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.categoria_his {
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 30px;
+    color: var(--branco);
+    text-align: center;
+}
+
+.detalhes_movimentacao strong {
+    font-size: 13px;
+    white-space: nowrap;
+    color: var(--secundaria);
+}
+
+.despesa_his .detalhes_movimentacao strong {
+    color: var(--cards_despesas);
+}
+
+/* DIAS TRABALHADOS E SERVIÇOS EXTRAS */
+
+.conteudo_trabalho .info_movimentacao {
+    width: 70%;
+}
+
+.conteudo_trabalho .detalhes_movimentacao {
+    width: 30%;
+}
+
+/* BOTÕES */
+
+.editar-excluir,
+.acoes_trabalho {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.editar-excluir form,
+.acoes_trabalho form {
+    display: flex;
+}
+
+.editar,
+.excluir,
+.desativar,
+.ativar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    height: 30px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--branco);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.editar {
+    background-color: var(--principal);
+}
+
+.excluir {
+    background-color: var(--cards_despesas);
+}
+
+.desativar {
+    background-color: var(--neutro_secundario);
+}
+
+.ativar {
+    background-color: var(--cards_beneficios);
+}
+
+.editar:hover {
+    background-color: var(--secundaria);
+}
+
+.excluir:hover {
+    background-color: #D93649;
+}
+
+.desativar:hover {
+    background-color: var(--neutro);
+}
+
+.ativar:hover {
+    background-color: #185EAB;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1024px) {
+
+    .inicio_relatorio_previsao {
+        gap: 70px;
+    }
+
+    .card_his {
+        width: calc(50% - 10px);
+    }
+
+    .historico {
+        width: 94%;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .inicio_relatorio_previsao {
+        gap: 30px;
+    }
+
+    .header .logo_branca {
+        width: 80px;
+    }
+
+    .header .icone_e_nome .nome_user {
+        display: none;
+    }
+
+    .card_his {
+        width: 100%;
+    }
+
+    .conteudo-div {
+        gap: 15px;
+        max-height: 350px;
+    }
+
+    .historico {
+        width: 96%;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    .header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .header .logo_branca {
+        width: 65px;
+        margin-left: 0;
+    }
+
+    .inicio_relatorio_previsao {
+        gap: 12px;
+        margin-left: 15px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 10px;
+    }
+
+    .header .icone_e_nome {
+        margin-right: 0;
+        gap: 5px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 18px;
+        height: 18px;
+    }
+
+    .logout img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .historico {
+        width: 95%;
+        margin: 25px auto;
+        padding: 12px;
+    }
+
+    .historico h3 {
+        font-size: 15px;
+    }
+
+    .conteudo-div {
+        max-height: 350px;
+        gap: 12px;
+    }
+
+    .card_his {
+        padding: 12px;
+    }
+
+    .info_movimentacao h4 {
+        font-size: 12px;
+    }
+
+    .editar,
+    .excluir,
+    .desativar,
+    .ativar {
+        min-width: 70px;
+        font-size: 10px;
+    }
+
+}
+
+@media (max-width: 375px) {
+
+    .inicio_relatorio_previsao {
+        gap: 8px;
+        margin-left: 10px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 9px;
+    }
+
+    .historico {
+        width: 96%;
+    }
+
+}
+
+@media (max-width: 325px) {
+
+    .header .logo_branca {
+        width: 55px;
+    }
+
+    .inicio_relatorio_previsao {
+        gap: 5px;
+        margin-left: 5px;
+    }
+
+    .inicio_relatorio_previsao a {
+        font-size: 8px;
+    }
+
+    .header .icone_e_nome .icone_user {
+        width: 15px;
+        height: 15px;
+    }
+
+    .logout img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .historico h3 {
+        font-size: 13px;
+    }
+
+}

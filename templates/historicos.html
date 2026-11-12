@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsões</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/historicos.css') }}">
+     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icone-janela.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="header">
+       <img class="logo_branca" src="{{ url_for('static', filename='img/logo_branca.png') }}" alt="">
+
+
+       <div class="inicio_relatorio_previsao">
+           <a href="{{ url_for('dashboard') }}">Início</a>
+            <a href="{{ url_for('relatorios') }}">Relatório</a>
+            <a href="{{ url_for('historicos') }}">Históricos</a>
+       </div>
+
+
+       <div class="icone_e_nome">
+           <a class="icone_user">
+                <img src="{{ url_for('static', filename=img) }}" alt="Foto de usuário">
+            </a>
+           <a href="{{ url_for('editar_usuario') }}"><p class="nome_user">Olá, {{nome}}</p></a>
+           <a href="{{ url_for('logout') }}" class="logout"><img src="{{ url_for('static', filename='img/logout.png') }}" alt="Símbolo de sair"></a>
+       </div>
+    </div>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {%for category, message in messages %}
+                <div class="flash {{category}}">{{message}}</div>
+                {%endfor%}
+            </div>
+            {%endif%}
+        {%endwith%}
+
+        <div class="historico">
+            <div class="titulo_historico">
+                <h3>Histórico de Movimentações</h3>
+                <a href="{{ url_for('historico_movimentacoes') }}">Acessar histórico completo</a>
+            </div>
+        <div class="conteudo-div">
+            {% for movimentacao in movimentacoes %}
+                <div class="card_his {% if movimentacao[1] == 'Despesa' %}despesa_his{% else %}receita_his{% endif %}">
+
+                    <div class="informacoes_card">
+
+                        <div class="info_movimentacao">
+                            <span class="data_movimentacao">
+                                {{ movimentacao[0].strftime('%d/%m/%Y') }}
+                            </span>
+
+                            <h4>{{ movimentacao[1] }}</h4>
+
+                            <p>{{ movimentacao[3] }}</p>
+                        </div>
+
+                        <div class="detalhes_movimentacao">
+                            <span class="categoria_his" style="background-color: {{ movimentacao[7] }};">
+                                {{ movimentacao[2] }}
+                            </span>
+
+                            <strong>
+                                R$ {{ "%.2f"|format(movimentacao[4])|replace('.', ',') }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    {% if movimentacao[2]|string|trim not in ['1001', '1002', 'Serviço Extra', 'Trabalho Diário'] %}
+
+                        <div class="editar-excluir">
+
+                            {% if movimentacao[0] == data %}
+
+                                <a href="{{ url_for('editar_receita_e_despesa', id=movimentacao[6]) }}" class="editar">
+                                    Editar
+                                </a>
+
+                                <form action="{{ url_for('excluir_movimentacao', id=movimentacao[6]) }}" method="post">
+                                    <button class="excluir" type="submit">
+                                        Deletar
+                                    </button>
+                                </form>
+
+                            {% else %}
+
+                                {% if movimentacao[5] == 0 %}
+
+                                    <form action="{{ url_for('alterar_status_movimentacao', id=movimentacao[6]) }}" method="post">
+                                        <button class="desativar" type="submit">
+                                            Desativar
+                                        </button>
+                                    </form>
+
+                                {% else %}
+
+                                    <form action="{{ url_for('alterar_status_movimentacao', id=movimentacao[6]) }}" method="post">
+                                        <button class="ativar" type="submit">
+                                            Ativar
+                                        </button>
+                                    </form>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+
+        <div class="historico">
+
+        <div class="titulo_historico">
+                <h3>Histórico de Trabalho Diário</h3>
+                <a href="{{ url_for('historico_trabalho') }}">Acessar histórico completo</a>
+            </div>
+
+        <div class="conteudo-div">
+
+            {% for trabalho in trabalhos %}
+
+                <div class="card_his">
+
+                    <div class="conteudo_trabalho">
+
+                        <div class="info_movimentacao">
+
+                            <span class="data_movimentacao">
+                                {{ trabalho[0].strftime('%d/%m/%Y') }}
+                            </span>
+
+                            <h4>Dia trabalhado</h4>
+
+                            <p>Pacotes coletados: {{ trabalho[1] }}</p>
+
+                            <p>Trabalhadores: {{ trabalho[2] }}</p>
+
+                        </div>
+
+                        <div class="detalhes_movimentacao">
+
+                            <strong>
+                                R$ {{ "%.2f"|format(trabalho[3])|replace(".", ",") }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="acoes_trabalho">
+
+                        {% if trabalho[0] == data %}
+
+                            <a href="{{ url_for('editar_trabalho', id=trabalho[4]) }}" class="editar">
+                                Editar
+                            </a>
+
+                            <form action="{{ url_for('excluir_trabalho', id=trabalho[4]) }}" method="post">
+                                <button class="excluir" type="submit">
+                                    Deletar
+                                </button>
+                            </form>
+
+                        {% else %}
+
+                            {% if trabalho[5] == 0 %}
+
+                                <form action="{{ url_for('alterar_status_trabalho', id=trabalho[4]) }}" method="post">
+                                    <button class="desativar" type="submit">
+                                        Desativar
+                                    </button>
+                                </form>
+
+                            {% else %}
+
+                                <form action="{{ url_for('alterar_status_trabalho', id=trabalho[4]) }}" method="post">
+                                    <button class="ativar" type="submit">
+                                        Ativar
+                                    </button>
+                                </form>
+
+                            {% endif %}
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+        <div class="historico">
+
+            <div class="titulo_historico">
+                <h3>Histórico de Serviços Extras</h3>
+                <a href="{{ url_for('historico_servico_extra') }}">Acessar histórico completo</a>
+            </div>
+
+            <div class="conteudo-div">
+
+                {% for servico in servicos %}
+
+                    <div class="card_his">
+
+                        <div class="conteudo_trabalho">
+
+                            <div class="info_movimentacao">
+
+                                <span class="data_movimentacao">
+                                    {{ servico[2].strftime('%d/%m/%Y') }}
+                                </span>
+
+                                <h4>{{ servico[3] }}</h4>
+
+                            </div>
+
+                            <div class="detalhes_movimentacao">
+
+                                <strong>
+                                    R$ {{ "%.2f"|format(servico[4])|replace(".", ",") }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <div class="acoes_trabalho">
+
+                            {% if servico[2] == data %}
+
+                                <a class="editar" href="{{ url_for('editar_servico_extra', id=servico[0]) }}">
+                                    Editar
+                                </a>
+
+                                <form action="{{ url_for('excluir_servico_extra', id=servico[0]) }}" method="post">
+                                    <button class="excluir" type="submit">
+                                        Deletar
+                                    </button>
+                                </form>
+
+                            {% else %}
+
+                                {% if servico[5] == 0 %}
+
+                                    <form action="{{ url_for('alterar_status_extra', id=servico[0]) }}" method="post">
+                                        <button class="desativar" type="submit">
+                                            Desativar
+                                        </button>
+                                    </form>
+
+                                {% else %}
+
+                                    <form action="{{ url_for('alterar_status_extra', id=servico[0]) }}" method="post">
+                                        <button class="ativar" type="submit">
+                                            Ativar
+                                        </button>
+                                    </form>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
